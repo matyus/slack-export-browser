@@ -1,0 +1,73 @@
+<!doctype html>
+<html>
+  <head>
+    <title>VUU Studio – In Conversation: Olive Juice</title>
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.2.1/mustache.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
+
+    <style type="text/css">
+      body {
+        font-family: Verdana, sans-serif;
+        font-size: 10px;
+        line-height: 1.4;
+      }
+
+      .message {
+        margin-bottom: 1em;
+      }
+
+      .name {
+        padding-right: 0.5em;
+        text-align: right;
+        width: 11em;
+      }
+      .text {
+        width: 500px;
+      }
+      .name,
+      .text {
+        display: inline-block;
+        vertical-align: top;
+      }
+
+    </style>
+  </head>
+  <body>
+    <div id="menu">
+      <form id="menu-form">
+        <fieldset>
+          <label for="menu-channels">Channels:</label>
+          <select id="menu-channels" name="menu-channels" required></select>
+        </fieldset>
+
+        <fieldset>
+          <label for="menu-date">Date:</label>
+          <input type="date" id="menu-date" name="menu-date" required />
+        </fieldset>
+
+        <fieldset>
+          <input type="submit" value="Load" />
+        </fieldset>
+      </form>
+
+    </div>
+    <div id="room"></div>
+
+    <script id="template-menu-form" type="x-tmpl-mustache">
+      {{#channels}}
+        <option id="{{id}}" value="{{name}}">{{name}} ({{members.length}} {{membersLabel}})</option>
+      {{/channels}}
+    </script>
+
+
+    <script id="template-message" type="x-tmpl-mustache">
+      <p class="message">
+        <strong class="name">{{ name }}:</strong> <span class="text">{{message}}</span>
+      </p>
+    </script>
+
+    <script src="/slack-export-formatter.js"></script>
+  </body>
+</html>

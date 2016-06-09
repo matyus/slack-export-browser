@@ -1,0 +1,14 @@
+{
+  "name": "slack-export-browser",
+  "version": "1.0.0",
+  "description": "Browse an exported Slack directory.",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Michael Matyus",
+  "license": "ISC",
+  "dependencies": {
+    "http-server": "^0.9.0"
+  }
+}
