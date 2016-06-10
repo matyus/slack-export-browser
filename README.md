@@ -1,12 +1,13 @@
 # Slack Export Browser
 
-You need to specify the channel name and a date upon which a conversation happened.
+## Getting Started
 
 1. Copy contents of Slack's export into `export/`:
 
-    cd /path/to/this/repo/ # i.e. ~/Documents/slack-export-browser
 
-    cp -R /path/to/downloaded-export-from-slack/* ./export/
+    `cd /path/to/this/repo/ # i.e. ~/Documents/slack-export-browser`
+
+    `cp -R /path/to/downloaded-export-from-slack/* ./export/`
 
 
 2. Install packages
@@ -14,11 +15,16 @@ You need to specify the channel name and a date upon which a conversation happen
 `npm install`
 
 
-3. Run static server
+3. Run server
 
-`http-server`
+`npm start`
 
 
-4. Done
+4. Go!
 
 Then visit `http://localhost:8080/`
+
+
+## Todo:
+
+[] Will need to handle of ranges of days/dates for larger exports.
