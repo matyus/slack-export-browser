@@ -33,6 +33,10 @@
       getSpecificChannelOnSpecificDate(e);
     });
 
+    $menuSelect.on('change', function(){
+      $menuForm.trigger('submit');
+    });
+
     //functions
     function init() {
       if(users && channel) {
@@ -51,14 +55,16 @@
     }
 
     function formatConversation(users, channel) {
-      return _.map(channel, function(message) {
+      return _.map(channel, function(day) {
+        return _.map(day, function(message) {
 
-        var messageData = {
-          name: users[message.user].real_name,
-          message: message.text
-        };
+          var messageData = {
+            name: users[message.user].real_name,
+            message: message.text
+          };
 
-        return Mustache.render(MessageTemplate, messageData);
+          return Mustache.render(MessageTemplate, messageData);
+        }).join('');
       });
     }
 
@@ -81,27 +87,20 @@
           channelName = val;
         }
 
-        if(key == 'menu-date') {
-          channelDate = val;
-        }
-
-        if(channelName && channelDate) {
-          getChannel(channelName, channelDate);
+        if(channelName) {
+          getChannel(channelName);
         }
       });
     }
 
     function getChannel(channelName, channelDate) {
-      if(!channelName && !channelDate) {
+      if(!channelName) {
         channelName = 'general';
-        channelDate = '2016-05-18';
-      } else if(channelName && !channelDate) {
-        alert('Please provide a date');
-      } else if(!channelName && channelDate) {
+      } else if(!channelName) {
         alert('Please choose a channel');
       }
 
-      $.getJSON('/export/'+ channelName +'/'+ channelDate +'.json')
+      $.getJSON('/channel/' + channelName)
         .done(function(response, textStatus) {
           if(textStatus === SUCCESS) {
             channel = response;
@@ -119,7 +118,7 @@
     }
 
     //ajax
-    $.getJSON('/export/channels.json')
+    $.getJSON('/channels')
       .done(function(response, textStatus) {
         if(textStatus === SUCCESS) {
           var list = _.map(response, function(channel) {
@@ -138,7 +137,7 @@
         initMenu();
       });
 
-    $.getJSON('/export/users.json')
+    $.getJSON('/users')
       .done(function(response, textStatus) {
         if(textStatus === SUCCESS) {
           users = _.indexBy(response, function(user) {

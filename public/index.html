@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
   <head>
-    <title>VUU Studio – In Conversation: Olive Juice</title>
+    <title>Slack Export Browser</title>
     <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.2.1/mustache.min.js"></script>
@@ -31,10 +31,11 @@
         display: inline-block;
         vertical-align: top;
       }
-
     </style>
   </head>
   <body>
+    <h1>Slack Export Browser</h1>
+
     <div id="menu">
       <form id="menu-form">
         <fieldset>
@@ -42,12 +43,7 @@
           <select id="menu-channels" name="menu-channels" required></select>
         </fieldset>
 
-        <fieldset>
-          <label for="menu-date">Date:</label>
-          <input type="date" id="menu-date" name="menu-date" required />
-        </fieldset>
-
-        <fieldset>
+        <fieldset hidden>
           <input type="submit" value="Load" />
         </fieldset>
       </form>
