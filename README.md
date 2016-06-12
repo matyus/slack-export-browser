@@ -5,7 +5,7 @@
 1. Copy contents of Slack's export into `export/`:
 
 
-    `cd /path/to/this/repo/ # i.e. ~/Documents/slack-export-browser`
+    `cd /path/to/this/repo/` i.e. ~/Documents/slack-export-browser
 
     `cp -R /path/to/downloaded-export-from-slack/* ./export/`
 
