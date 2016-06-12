@@ -2,61 +2,52 @@
 <html>
   <head>
     <title>Slack Export Browser</title>
-    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.2.1/mustache.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
-
-    <style type="text/css">
-      body {
-        font-family: Verdana, sans-serif;
-        font-size: 10px;
-        line-height: 1.4;
-      }
-
-      .message {
-        margin-bottom: 1em;
-      }
-
-      .name {
-        padding-right: 0.5em;
-        text-align: right;
-        width: 11em;
-      }
-      .text {
-        width: 500px;
-      }
-      .name,
-      .text {
-        display: inline-block;
-        vertical-align: top;
-      }
-    </style>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous" />
+    <link rel="stylesheet" href="/main.css" />
   </head>
   <body>
-    <h1>Slack Export Browser</h1>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="/">Slack Export Browser</a>
+        </div>
+      </div>
+    </nav>
 
-    <div id="menu">
+    <div class="container">
       <form id="menu-form">
-        <fieldset>
-          <label for="menu-channels">Channels:</label>
-          <select id="menu-channels" name="menu-channels" required></select>
-        </fieldset>
+        <nav id="menu" class="navbar navbar-default">
+          <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                  Channels <span class="caret"></span>
+                </a>
 
-        <fieldset hidden>
-          <input type="submit" value="Load" />
-        </fieldset>
+                <ul id="menu-channels" class="dropdown-menu">
+                  <!-- ajax -->
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </nav><!-- eo navbar -->
       </form>
 
-    </div>
-    <div id="room"></div>
+      <div class="panel panel-default">
+        <div id="room-name" class="panel-heading"></div>
+        <div id="room" class="panel-body"></div>
+      </div>
+    </div><!-- eo container -->
 
     <script id="template-menu-form" type="x-tmpl-mustache">
       {{#channels}}
-        <option id="{{id}}" value="{{name}}">{{name}} ({{members.length}} {{membersLabel}})</option>
+        <li><a href="#{{name}}" id="{{id}}" data-channel-name="{{name}}">{{name}} ({{members.length}} {{membersLabel}})</a></li>
       {{/channels}}
     </script>
 
+    <script id="template-channel-title" type="x-tmpl-mustache">
+      <h3 class="panel-title">Channel: {{channelName}}</h3>
+    </script>
 
     <script id="template-message" type="x-tmpl-mustache">
       <p class="message">
@@ -64,6 +55,11 @@
       </p>
     </script>
 
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.2.1/mustache.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
     <script src="/slack-export-formatter.js"></script>
   </body>
 </html>

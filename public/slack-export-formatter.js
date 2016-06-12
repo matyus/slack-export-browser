@@ -1,5 +1,3 @@
-'use strict';
-
 (function(win, doc, $, _, moment) {
   'use strict';
 
@@ -21,20 +19,20 @@
     var MessageTemplate = $('#template-message').html();
     Mustache.parse(MessageTemplate);
 
+    var ChannelNameTemplate = $('#template-channel-title').html();
+    Mustache.parse(ChannelNameTemplate);
+
     //views
     var $room = $('#room');
+    var $roomName = $('#room-name');
     var $menu = $('#menu');
     var $menuForm = $('#menu').children('#menu-form');
     var $menuSelect = $('#menu-channels');
 
     //bindings
-    $menuForm.on('submit', function(e){
+    $menuSelect.on('click', 'a', function(e){
       e.preventDefault();
-      getSpecificChannelOnSpecificDate(e);
-    });
-
-    $menuSelect.on('change', function(){
-      $menuForm.trigger('submit');
+      getSpecificChannel(e);
     });
 
     //functions
@@ -72,28 +70,20 @@
       return Mustache.render(FormTemplate, { channels: channels });
     }
 
-    function getSpecificChannelOnSpecificDate(e) {
-      var formData = $(e.currentTarget).serialize();
-
-      var channelName;
-      var channelDate;
-
-      formData.split('&').forEach(function(input, index) {
-        var pair = input.split('=')
-        var key = pair[0];
-        var val = pair[1];
-
-        if(key == 'menu-channels') {
-          channelName = val;
-        }
-
-        if(channelName) {
-          getChannel(channelName);
-        }
-      });
+    function formatChannelName(channelName) {
+      return Mustache.render(ChannelNameTemplate, { channelName: channelName });
     }
 
-    function getChannel(channelName, channelDate) {
+    function getSpecificChannel(e) {
+      var data = $(e.currentTarget).data();
+
+      if('channelName' in data && data !== '') {
+        var channelName = data.channelName;
+        getChannel(channelName);
+      }
+    }
+
+    function getChannel(channelName) {
       if(!channelName) {
         channelName = 'general';
       } else if(!channelName) {
@@ -104,6 +94,9 @@
         .done(function(response, textStatus) {
           if(textStatus === SUCCESS) {
             channel = response;
+
+            var title = formatChannelName(channelName);
+            $roomName.html(title);
           } else {
             throw new Error('A problem occurred');
           }
@@ -115,7 +108,7 @@
         .always(function(response, textStatus) {
           init();
         });
-    }
+    } // eo getChannel
 
     //ajax
     $.getJSON('/channels')
