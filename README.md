@@ -22,9 +22,11 @@
 
 4. Go!
 
-Then visit `http://localhost:8080/`
+Then visit `http://localhost:5000/`
 
 
 ## Todo:
 
+- [x] Use node/express
+- [x] Use twitter bootstrap
 - [ ] Will need to handle of ranges of days/dates for larger exports.
