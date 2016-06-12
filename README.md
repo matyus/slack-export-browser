@@ -27,4 +27,4 @@ Then visit `http://localhost:8080/`
 
 ## Todo:
 
-[] Will need to handle of ranges of days/dates for larger exports.
+- [ ] Will need to handle of ranges of days/dates for larger exports.
