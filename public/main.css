@@ -1,0 +1,31 @@
+body {
+  padding-top: 50px;
+}
+
+#menu {
+  margin-top: 20px;
+}
+
+
+#room {
+  height: 500px;
+  overflow-y: auto;
+}
+
+.message {
+  margin-bottom: 1em;
+}
+
+.name {
+  padding-right: 0.5em;
+  text-align: right;
+  width: 11em;
+}
+.text {
+  width: 500px;
+}
+.name,
+.text {
+  display: inline-block;
+  vertical-align: top;
+}
